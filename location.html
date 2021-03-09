@@ -1,0 +1,39 @@
+<body>
+   <button class ="btn btn-lg btn-primary" onclick="getLocationname()">Show offers in my area </button>
+  
+  
+  </body>
+
+
+<script>
+    var x = document.getElementById("demo");
+    var home = window.location.origin;
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+      document.write("hello");
+      console.log(home);
+    
+      
+      var form;
+      form = `<form action='{% url 'capgas' %}' method='POST' class='location-form'>{% csrf_token %}<input type='hidden' name='lat' value='`+lat+`'/>"
+        +"<input type='hidden' name='long' value='`+long+`'/></form>`;
+      document.write(form);
+      $('.lat-form').append(form);
+      
+      
+      $('.location-form').submit();
+      
+    
+    
+      };
+  
+  function getLocationname() {
+      
+      if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+      
+      } else { 
+      x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+</script>
